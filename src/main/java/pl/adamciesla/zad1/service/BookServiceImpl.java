@@ -3,7 +3,9 @@ import pl.adamciesla.zad1.model.Book;
 import pl.adamciesla.zad1.repository.BookRepository;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BookServiceImpl implements BookService {
 
     private BookRepository bookRepository;
@@ -25,7 +27,7 @@ public class BookServiceImpl implements BookService {
     }
     @Override
     public Book add(String title, String author) {
-        return bookRepository.save(new Book(0, title, author));
+        return bookRepository.save(new Book(0, title, author,null,null,true));
     }
     @Override
     public boolean remove(long id) {
@@ -36,10 +38,18 @@ public class BookServiceImpl implements BookService {
         Optional<Book> bookOptional = bookRepository.findById(id);
 
         if (bookOptional.isPresent()) {
-            Book updated = new Book(id, newTitle, newAuthor);
+            Book updated = new Book(id, newTitle, newAuthor,null,null,true);
             Book saved = bookRepository.save(updated);
             return Optional.of(saved);
         }
         return Optional.empty();
+    }
+    @Override
+    public List<Book> searchByPublishYear(int year) {
+        return bookRepository.findByPublishYear(year);
+    }
+    @Override
+    public List<Book> listAllSortedByTitle() {
+        return bookRepository.findAllOrderByTitle();
     }
 }

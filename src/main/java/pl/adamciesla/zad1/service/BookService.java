@@ -16,4 +16,7 @@ public interface BookService {
 
     Optional<Book> edit(long id, String newTitle, String newAuthor);
 
+    List<Book> searchByPublishYear(int year);
+
+    List<Book> listAllSortedByTitle();
 }

@@ -8,4 +8,7 @@ public class Book {
     private long id;
     private String title;
     private String author;
+    private Integer publishYear;
+    private String isbn;
+    private boolean available;
 }

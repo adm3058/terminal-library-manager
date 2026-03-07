@@ -17,4 +17,8 @@ public interface BookRepository {
     Book save(Book book);
 
     boolean deleteById(long id);
+
+    List<Book> findByPublishYear(int year);
+
+    List<Book> findAllOrderByTitle();
 }
